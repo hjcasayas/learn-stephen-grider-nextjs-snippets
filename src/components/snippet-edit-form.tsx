@@ -12,7 +12,7 @@ export interface SnippetEditFormProps {
 export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
     const [code, setCode] = useState<string>(snippet.code);
 
-    function handleEditorChange(value: string | undefined, _ev: unknown) {
+    function handleEditorChange(value: string | undefined) {
         setCode(value ?? '');
     }
 
