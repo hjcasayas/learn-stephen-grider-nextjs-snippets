@@ -1,0 +1,30 @@
+services:
+  nextjs:
+    build:
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    develop:
+      watch:
+        - action: sync
+          path: ./.next
+          target: /apps/.next
+        - action: rebuild
+          path: ./package.json
+
+  postgres:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+
