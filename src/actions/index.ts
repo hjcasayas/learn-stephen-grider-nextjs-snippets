@@ -1,6 +1,7 @@
 "use server";
 
 import { prismaDb } from "@/db/prisma";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function editSnippet(id: number, code: string) {
@@ -13,6 +14,7 @@ export async function editSnippet(id: number, code: string) {
     },
   });
 
+  revalidatePath("/");
   redirect("/");
 }
 
@@ -23,6 +25,7 @@ export async function deleteSnippet(id: number) {
     },
   });
 
+  revalidatePath("/");
   redirect("/");
 }
 
@@ -50,5 +53,6 @@ export async function createSnippet(
 
     return { message: "Something went wrong." };
   }
+  revalidatePath("/");
   redirect("/");
 }
